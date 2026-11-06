@@ -1,0 +1,22 @@
+owner: minyaykin-bit
+repo: examen-na-iizi-status
+sites:
+  - name: Основной сайт
+    url: https://examennaizi.ru/
+    expectedStatusCodes: [200]
+  - name: Mini App
+    url: https://examennaizi.ru/miniapp/
+    expectedStatusCodes: [200]
+  - name: Страница ресурсов
+    url: https://info.examennaizi.ru/
+    expectedStatusCodes: [200]
+status-website:
+  baseUrl: /examen-na-iizi-status
+  name: Экзамен на ИИзи
+  introTitle: Доступность «Экзамена на ИИзи»
+  introMessage: Автоматические проверки сайта, Mini App и страницы ресурсов.
+  navbar:
+    - title: Статус
+      href: /examen-na-iizi-status/
+    - title: О проекте
+      href: https://info.examennaizi.ru/

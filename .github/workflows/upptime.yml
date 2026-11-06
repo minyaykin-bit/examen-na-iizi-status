@@ -1,0 +1,50 @@
+name: Upptime
+on:
+  schedule:
+    - cron: '13,23,33,43,53 * * * *'
+    - cron: '3 * * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: upptime
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v6
+      - uses: upptime/uptime-monitor@v1.46.5
+        with:
+          command: update
+        env:
+          GH_PAT: ${{ github.token }}
+
+  publish:
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '3 * * * *'
+    needs: check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: upptime/uptime-monitor@v1.46.5
+        with:
+          command: site
+        env:
+          GH_PAT: ${{ github.token }}
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: site/status-page/__sapper__/export/
+      - uses: actions/deploy-pages@v4
+        id: deploy
