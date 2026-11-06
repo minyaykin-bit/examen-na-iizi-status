@@ -4,12 +4,18 @@ sites:
   - name: Основной сайт
     url: https://examennaizi.ru/
     expectedStatusCodes: [200]
+    connectTimeout: 7
+    requestTimeout: 12
   - name: Mini App
     url: https://examennaizi.ru/miniapp/
     expectedStatusCodes: [200]
+    connectTimeout: 7
+    requestTimeout: 12
   - name: Страница ресурсов
     url: https://info.examennaizi.ru/
     expectedStatusCodes: [200]
+    connectTimeout: 7
+    requestTimeout: 12
 status-website:
   baseUrl: /examen-na-iizi-status
   name: Экзамен на ИИзи
